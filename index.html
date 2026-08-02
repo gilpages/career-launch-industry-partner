@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Career Launch 2027: Industry Partnership</title>
-<meta name="description" content="Career Launch 2027: put your sector in front of students inside myBlueprint. An annual partnership launching April 2027, with year-round presence across sector pages, LaunchPad and teacher tools.">
+<meta name="description" content="Career Launch 2027: put your sector in front of students inside myBlueprint. An annual partnership launching April 2027, with year-round presence across sector pages, LaunchPad, and teacher tools.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,600;1,9..144,700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>document.documentElement.className+=' js';</script>
 <style>
   :root{
     --ink:#1a1a2e;
@@ -23,14 +24,14 @@
     --bar:68px;
   }
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth; scroll-padding-top:calc(var(--bar) + 40px);}
+  html{scroll-behavior:smooth; scroll-padding-top:calc(var(--bar) + 20px);}  /* one mechanism only: scroll-padding and scroll-margin stack */
   body{
     margin:0;
     background:var(--paper);
     color:var(--ink);
     font-family:'Source Sans 3', sans-serif;
-    font-size:17px;
-    line-height:1.6;
+    font-size:17.5px;
+    line-height:1.65;
     -webkit-font-smoothing:antialiased;
   }
   h1,h2,h3,h4{
@@ -96,14 +97,10 @@
     pointer-events:none;
   }
   .hero .wrap{position:relative;}
-  .hero-grid{
-    display:grid;
-    grid-template-columns:minmax(0,1.08fr) minmax(0,0.92fr);
-    gap:60px; align-items:center;
-  }
   .hero h1{
-    font-size:clamp(38px, 4.6vw, 56px);
-    margin:16px 0 24px;
+    font-size:clamp(40px, 5.6vw, 70px);
+    max-width:17ch;
+    margin:18px 0 26px;
   }
   /* Fraunces is loaded without an italic axis, so emphasis is weight + highlight, not slant */
   .hero h1 .hl{
@@ -114,11 +111,28 @@
     -webkit-box-decoration-break:clone; box-decoration-break:clone;
   }
   .hero p.lede{
-    font-size:18.5px; color:#3c463f;
-    margin-bottom:34px;
+    font-size:19px; color:#3c463f;
+    max-width:62ch;
+    margin-bottom:38px;
   }
-  .hero-actions{display:flex; gap:16px; flex-wrap:wrap; align-items:center;}
-  /* Stat rule spans both columns, so the hero has a horizontal floor */
+  .hero-actions{display:flex; gap:18px; flex-wrap:wrap; align-items:center;}
+  .btn-primary{
+    background:var(--navy); color:var(--white);
+    font-weight:600; font-size:16px;
+    padding:15px 28px; border-radius:3px;
+    text-decoration:none; display:inline-block;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .btn-primary:hover{background:var(--navy-deep); transform:translateY(-1px);}
+  .btn-ghost{
+    font-weight:600; font-size:16px; color:var(--ink);
+    padding:15px 4px; text-decoration:none;
+    display:inline-block;
+    border-bottom:2px solid var(--blue);
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .btn-ghost:hover{border-bottom-color:var(--navy); color:var(--navy);}
+  /* Stat rule runs full width, giving the hero a horizontal floor */
   .scale-strip{
     display:grid; grid-template-columns:repeat(3,1fr);
     gap:28px;
@@ -132,73 +146,7 @@
     line-height:1;
   }
   .scale-num .plus{color:var(--blue-deep);}
-  .scale-label{font-size:13.5px; color:#5c665e; margin-top:8px; max-width:24ch; line-height:1.45;}
-
-  /* Hero artifact: the partner page. The one thing a partner owns for twelve months,
-     and the only place on this page the directory is visible. Desktop only - see the
-     1040px breakpoint, where it is hidden rather than stacked. */
-  .rec{
-    background:var(--white);
-    border:1px solid var(--line);
-    border-radius:10px;
-    box-shadow:0 26px 54px -34px rgba(34,34,76,0.45);
-    overflow:hidden;
-  }
-  .rec-top{
-    display:flex; align-items:center; justify-content:space-between; gap:14px;
-    padding:12px 20px; background:var(--navy);
-  }
-  .rec-top .w{color:#fff; font-weight:700; font-size:14px;}
-  .rec-top .t{
-    font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:0.1em;
-    text-transform:uppercase; color:#a8b0d8;
-  }
-  .rec-body{padding:24px 24px 22px;}
-  .rec-org{display:flex; align-items:center; gap:14px; margin-bottom:18px;}
-  .rec-avatar{
-    width:46px; height:46px; border-radius:8px; flex:none;
-    background:var(--paper-dim); border:1px solid var(--line);
-    display:flex; align-items:center; justify-content:center;
-    font-family:'IBM Plex Mono',monospace; font-size:10px; color:#8a8570;
-    text-align:center; line-height:1.2;
-  }
-  .rec-name{font-family:'Fraunces',serif; font-weight:600; font-size:19px; color:var(--navy);}
-  .rec-meta{font-size:12.5px; color:#6b7391;}
-  .rec-line{border:0; border-top:1px solid #ece9df; margin:0 0 14px;}
-  .rec-h{
-    font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:0.1em;
-    text-transform:uppercase; color:var(--blue-deep); margin-bottom:11px;
-  }
-  .rec-tags{display:flex; flex-wrap:wrap; gap:7px; align-items:center;}
-  .rec-tag{
-    font-size:12.5px; border:1px solid #dcd6c4; border-radius:16px;
-    padding:5px 12px; color:#4d556f; background:var(--paper);
-  }
-  .rec-more{font-size:12px; color:#8a8570;}
-  .rec-foot{
-    display:flex; align-items:center; gap:10px;
-    margin-top:18px; padding-top:14px; border-top:1px solid #ece9df;
-    font-size:12px; color:#6b7391; flex-wrap:wrap;
-  }
-  .rec-stamp{
-    font-family:'IBM Plex Mono',monospace; font-size:11px;
-    color:#2c7a4b; background:#e8f4ec; border:1px solid #c9e4d3;
-    border-radius:4px; padding:4px 9px; white-space:nowrap;
-  }
-  .rec-cap{margin-top:16px; font-size:13px; color:#6f7768; line-height:1.55;}
-  .btn-primary{
-    background:var(--navy); color:var(--white);
-    font-weight:600; font-size:15.5px;
-    padding:14px 26px; border-radius:3px;
-    text-decoration:none; display:inline-block;
-    transition:background .15s ease, transform .15s ease;
-  }
-  .btn-primary:hover{background:var(--navy-deep); transform:translateY(-1px);}
-  .btn-ghost{
-    font-weight:600; font-size:15.5px; color:var(--ink);
-    padding:14px 4px; text-decoration:none;
-    border-bottom:2px solid var(--blue);
-  }
+  .scale-label{font-size:14.5px; color:#5c665e; margin-top:8px; max-width:24ch; line-height:1.45;}
 
   /* ===== Proof strip (2025 actuals) ===== */
   .proof{
@@ -218,13 +166,13 @@
   }
   .proof-item .num sup{font-size:0.45em; font-weight:500; vertical-align:super; margin-left:2px; color:#a8b0d8;}
   .proof-item .label{
-    font-size:14.5px; color:#c6cae4; margin-top:6px; max-width:24ch; line-height:1.45;
+    font-size:15.5px; color:#c6cae4; margin-top:6px; max-width:24ch; line-height:1.45;
   }
   .proof-note{
-    margin:30px 0 0; font-size:15.5px; color:#d3d7ec; max-width:62ch; line-height:1.6;
+    margin:32px 0 0; font-size:18px; color:#d3d7ec; max-width:62ch; line-height:1.6;
   }
   .proof-src{
-    margin:10px 0 0; font-size:12.5px; color:#8e93b6; max-width:62ch;
+    margin:12px 0 0; font-size:14px; color:#8e93b6; max-width:62ch;
   }
 
   /* ===== Logo wall: fixed cells, so mismatched marks line up ===== */
@@ -260,10 +208,9 @@
 
   /* ===== Section shell ===== */
   section{padding:88px 0;}
-  section[id]{scroll-margin-top:calc(var(--bar) + 40px);}
   .section-head{max-width:660px; margin-bottom:44px;}
   .section-head h2{font-size:clamp(28px,3.2vw,38px); margin:10px 0 14px;}
-  .section-head p{color:#4a544c; font-size:16.5px;}
+  .section-head p{color:#4a544c; font-size:18px;}
 
   /* ===== Journey ===== */
   .journey-grid{
@@ -288,7 +235,7 @@
   .journey-card:nth-child(2)::after{background:rgba(0,146,255,0.45);}
   .journey-card:nth-child(3)::after{background:rgba(0,146,255,0.2);}
   .journey-card h3{font-size:21px; margin:12px 0 10px;}
-  .journey-card p{font-size:15px; color:#4a544c; margin:0 0 22px;}
+  .journey-card p{font-size:16px; color:#4a544c; margin:0 0 22px;}
   .effort-tag{
     margin-top:auto;                        /* aligns tags across cards of unequal length */
     font-family:'IBM Plex Mono', monospace; font-size:12px; line-height:1.5;
@@ -320,18 +267,18 @@
     content:""; width:8px; height:8px; border-radius:50%; flex:none;
     background:currentColor;
   }
-  .col-sub{
-    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.06em;
+  .national-col .col-sub{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:0.06em;
     text-transform:uppercase; margin:8px 0 0;
   }
-  .national-col.on .col-sub{color:#9aa2cd;}
-  .national-col.off .col-sub{color:#8a8570;}
-  .national-col p{font-size:14.5px; margin:14px 0 0;}
+  .national-col.on .col-sub{color:#aeb5da;}
+  .national-col.off .col-sub{color:#6e6a59;}
+  .national-col p{font-size:16px; margin:14px 0 0;}
   .national-col.on p{color:#d3d7ec;}
   .national-col.off p{color:#4a544c;}
   .incl{list-style:none; margin:18px 0 0; padding:0;}
   .incl li{
-    font-size:14.5px; color:#d3d7ec; padding:9px 0 9px 26px;
+    font-size:15.5px; color:#d3d7ec; padding:9px 0 9px 26px;
     position:relative; border-top:1px solid rgba(255,255,255,0.11);
   }
   .incl li:first-child{border-top:none;}
@@ -341,7 +288,7 @@
     border-bottom:2px solid var(--blue); transform:rotate(-45deg);
   }
   .national-foot{
-    margin-top:20px; font-size:13.5px; color:#6f7768; grid-column:1 / -1;
+    margin-top:22px; font-size:14.5px; color:#5c6357; grid-column:1 / -1;
   }
   .national-foot strong{color:var(--navy); font-weight:600;}
 
@@ -360,9 +307,9 @@
     overflow:hidden;
     box-shadow:0 28px 60px -30px rgba(34,34,76,0.42);
   }
-  .mock-credit{font-size:12.5px; color:#6b7391; padding-top:16px; border-top:1px solid #e6e9f2;}
+  .mock-credit{font-size:12.5px; color:#5c6486; padding-top:16px; border-top:1px solid #e6e9f2;}
   .mock-credit strong{color:var(--navy);}
-  .mock-caption{margin-top:20px; font-size:13.5px; color:#5c665e; max-width:640px;}
+  .mock-caption{margin-top:20px; font-size:14px; color:#5c665e; max-width:640px;}
 
   .vframe{
     position:relative;
@@ -398,11 +345,15 @@
   }
   .vframe-lower{
     position:absolute; left:0; right:0; bottom:0;
-    padding:26px 12px 11px;
-    background:linear-gradient(to top, rgba(9,10,24,0.86), transparent);
+    padding:32px 12px 12px;
+    background:linear-gradient(to top, rgba(9,10,24,0.92) 42%, transparent);
+    display:flex; flex-direction:column; gap:3px;
   }
-  .vframe-lower .n{color:#fff; font-size:12.5px; font-weight:700; line-height:1.2;}
-  .vframe-lower .r{color:#c3cae8; font-size:11px; margin-top:2px;}
+  .vframe-lower .n{
+    display:block; color:#fff; font-size:12px; font-weight:700;
+    line-height:1.25; letter-spacing:-0.005em;
+  }
+  .vframe-lower .r{display:block; color:#b9c1e2; font-size:10.5px; line-height:1.3;}
   .vframe-cc{
     position:absolute; left:10px; top:10px;
     font-family:'IBM Plex Mono', monospace; font-size:9.5px; letter-spacing:0.06em;
@@ -478,7 +429,7 @@
   .coll-row .dur{font-family:'IBM Plex Mono', monospace; font-size:11px; color:#666d85;}
   .coll-cta{
     display:inline-block; margin-top:16px; font-size:12.5px; font-weight:600;
-    color:#fff; background:var(--blue); padding:9px 16px; border-radius:5px;
+    color:#fff; background:var(--blue-deep); padding:9px 16px; border-radius:5px;
   }
   .plan-card{background:#fff; border:1px solid #dfe3ef; border-radius:8px; padding:18px 20px;}
   .plan-h{
@@ -515,10 +466,30 @@
   /* ===== Close ===== */
   .final{background:var(--ink); color:var(--white); text-align:center;}
   .final h2{color:var(--white); font-size:clamp(30px,4vw,44px); margin-bottom:18px;}
-  .final p{color:#c3ccc6; font-size:17px; max-width:560px; margin:0 auto 34px;}
-  .final .btn-primary{background:var(--blue);}
-  .final .btn-primary:hover{background:var(--blue-deep);}
+  .final p{color:#c3ccc6; font-size:18.5px; max-width:560px; margin:0 auto 34px;}
+  .final .btn-primary{background:var(--blue-deep);}   /* white on --blue is only 3.15:1 */
+  .final .btn-primary:hover{background:#004b81;}
   .final-note{margin-top:20px; font-size:13px; color:#8f93b5;}
+  /* The dated sequence carries the urgency: three real commitments, nearest first. */
+  .dates{
+    display:flex; max-width:640px; margin:0 auto 30px;
+    border-top:1px solid rgba(255,255,255,0.16);
+    border-bottom:1px solid rgba(255,255,255,0.16);
+  }
+  .date-item{
+    flex:1; padding:18px 10px; text-align:center;
+    border-left:1px solid rgba(255,255,255,0.11);
+  }
+  .date-item:first-child{border-left:none;}
+  .date-item.next{background:rgba(0,146,255,0.10);}
+  .date-k{
+    display:block; margin-bottom:6px;
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px;
+    letter-spacing:0.06em; text-transform:uppercase; color:#8ecbff;
+  }
+  .date-item.next .date-k{color:#fff;}
+  .date-v{font-size:14.5px; color:#c3ccc6;}
+
   .price-signal{
     max-width:560px; margin:0 auto 32px;
     border:1px solid rgba(255,255,255,0.16);
@@ -530,22 +501,24 @@
     letter-spacing:0.14em; text-transform:uppercase; color:#7cc4ff;
     display:block; margin-bottom:8px;
   }
-  .price-signal p{margin:0; font-size:14.5px; color:#c3ccc6; line-height:1.6;}
+  /* Scoped: .final p would otherwise win on specificity and reimpose its 34px margin. */
+  .price-signal .ps-lead{margin:0; max-width:none; font-size:16.5px; color:#dfe5e1; line-height:1.6;}
 
   footer{
     padding:36px 0; border-top:1px solid var(--line);
-    font-size:13.5px; color:#6c766e;
+    font-size:14px; color:#5b645d;
   }
   footer .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;}
 
   /* ===== Responsive ===== */
   @media (max-width:1040px){
     .logo-cell{height:54px;}   /* still five across; only the cell shortens */
-    .hero-grid{grid-template-columns:1fr;}
-    .hero-art{display:none;}
     .scale-strip{grid-template-columns:repeat(3,1fr); gap:24px;}
   }
   @media (max-width: 860px){
+    .dates{flex-direction:column;}
+    .date-item{border-left:none; border-top:1px solid rgba(255,255,255,0.11); padding:14px 10px;}
+    .date-item:first-child{border-top:none;}
     .logo-cell{height:48px;}
     .logo-row{gap:12px;}
     .proof-grid{grid-template-columns:1fr; gap:20px;}
@@ -569,9 +542,9 @@
     .vframe-play::after{border-left:12px solid #fff; border-top:7px solid transparent; border-bottom:7px solid transparent;}
     .vframe-time{font-size:9px; right:6px; top:6px; padding:2px 5px;}
     .vframe-cc{display:none;}
-    .vframe-lower{padding:18px 8px 8px;}
-    .vframe-lower .n{font-size:10.5px;}
-    .vframe-lower .r{font-size:9px;}
+    .vframe-lower{padding:22px 8px 9px; gap:2px;}
+    .vframe-lower .n{font-size:10px;}
+    .vframe-lower .r{font-size:8.5px;}
     .next-grid{grid-template-columns:repeat(3,1fr); gap:6px; margin-top:12px;}
     .next-item{padding:9px 8px; font-size:11px;}
     .next-item span{display:none;}
@@ -600,12 +573,38 @@
   }
   /* Two across on a phone: 5 and 2 are the only counts that divide ten evenly. */
   @media (max-width: 620px){
+    .scale-strip{grid-template-columns:1fr; gap:22px;}
+    .scale-label{max-width:none;}
     .logo-cell{flex:0 0 calc((100% - 12px) / 2); height:52px;}
     .logo-row{gap:14px 12px; max-width:340px; margin:0 auto;}
   }
+  /* ===== Motion =====
+     Gated on html.js so the page is fully visible without JavaScript, and
+     switched off entirely under prefers-reduced-motion. */
+  .js .rv{
+    opacity:0; transform:translateY(16px);
+    transition:opacity .62s cubic-bezier(.22,.61,.24,1), transform .62s cubic-bezier(.22,.61,.24,1);
+    transition-delay:calc(var(--d, 0) * 70ms);
+  }
+  .js .rv.in{opacity:1; transform:none;}
+
+  .topbar{transition:box-shadow .22s ease;}
+  .topbar.scrolled{box-shadow:0 6px 22px -14px rgba(34,34,76,0.45);}
+
+  .journey-card{transition:background .2s ease;}
+  .journey-card:hover{background:#fffefa;}
+  .journey-card::after{transition:height .2s ease;}
+  .journey-card:hover::after{height:5px;}
+
+  .res-box{transition:transform .2s ease, box-shadow .2s ease;}
+  .res-box:hover{transform:translateY(-2px); box-shadow:0 10px 22px -16px rgba(34,34,76,0.5);}
+
+  .js .bar-fill{transition:width .95s cubic-bezier(.22,.61,.24,1);}
+
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
-    *{transition:none !important;}
+    *{transition:none !important; animation:none !important;}
+    .js .rv{opacity:1; transform:none;}
   }
 </style>
 </head>
@@ -620,48 +619,12 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="hero-grid">
-      <div>
-        <span class="eyebrow">Career Launch 2027 &middot; Industry Partnership</span>
-        <h1>Get in front of students <span class="hl">before they’ve picked a path.</span></h1>
-        <p class="lede">myBlueprint is where Canadian students plan their education and career paths. Career Launch puts employers, industry associations and post-secondary institutions inside that experience year-round, with an annual launch every April.</p>
-        <div class="hero-actions">
-          <a class="btn-primary" href="#connect">Book a call</a>
-          <a class="btn-ghost" href="#proof">See what year one did &darr;</a>
-        </div>
-      </div>
-
-      <div class="hero-art">
-        <div class="rec">
-          <div class="rec-top">
-            <span class="w">Your partner page</span>
-            <span class="t">Educator view</span>
-          </div>
-          <div class="rec-body">
-            <div class="rec-org">
-              <div class="rec-avatar">YOUR<br>LOGO</div>
-              <div>
-                <div class="rec-name">[Your organization]</div>
-                <div class="rec-meta">[Sector] &middot; <b>12 km from this school</b> &middot; 4 clips</div>
-              </div>
-            </div>
-            <hr class="rec-line">
-            <div class="rec-h">What you'll support</div>
-            <div class="rec-tags">
-              <span class="rec-tag">Guest speaker (virtual)</span>
-              <span class="rec-tag">Apprenticeships / OYAP</span>
-              <span class="rec-tag">Field trip facilitation</span>
-              <span class="rec-tag">Certification training</span>
-              <span class="rec-more">+5 more</span>
-            </div>
-            <div class="rec-foot">
-              <span class="rec-stamp">Reconfirmed at renewal</span>
-              <span>Your Career Launch presence and your year-round entry, on one page.</span>
-            </div>
-          </div>
-        </div>
-        <p class="rec-cap">Educators search by sector and by distance from their school. You state what you'll support &mdash; capability, never live postings.</p>
-      </div>
+    <span class="eyebrow">Career Launch 2027 &middot; Industry Partnership</span>
+    <h1>Get in front of students <span class="hl">before they’ve picked a path.</span></h1>
+    <p class="lede">myBlueprint is where Canadian students plan their education and career paths. Career Launch puts employers, industry associations, and post-secondary institutions inside that experience year-round, with a launch every April.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#connect">Book a call</a>
+      <a class="btn-ghost" href="#proof">See what year one did &darr;</a>
     </div>
 
     <!-- Swap 1M+ for the confirmed 2025-26 figure when it lands, and record it in Section 16.8. -->
@@ -679,7 +642,7 @@
     <div class="proof-grid">
       <div class="proof-item">
         <div class="num">60,000<sup>+</sup></div>
-        <div class="label">student-session views, educator-declared</div>
+        <div class="label">student-session views</div>
       </div>
       <div class="proof-item">
         <div class="num">361</div>
@@ -691,7 +654,7 @@
       </div>
     </div>
     <p class="proof-note">That was a standalone event. For 2027, your content lives inside a platform districts already license and students already use to plan their courses and pathways.</p>
-    <p class="proof-src">Reach is educator-declared: teachers reported class size at registration. No student was named, emailed or given an account.</p>
+    <p class="proof-src">Based on class sizes teachers reported at registration.</p>
   </div>
 </section>
 
@@ -730,12 +693,12 @@
         <span class="journey-num">April 2027</span>
         <h3>Career Launch</h3>
         <p>Your clips premiere inside the collections teachers assign to a class, and your partner page goes live: who you are, what you'll support, and how a teacher reaches you.</p>
-        <span class="effort-tag">45 to 90 seconds a clip, due 28 February 2027. Clip count scales with the size of your partnership.</span>
+        <span class="effort-tag">45 to 90 seconds a clip, due February 28, 2027. Clip count scales with the size of your partnership.</span>
       </div>
       <div class="journey-card">
         <span class="journey-num">All year</span>
         <h3>Year-round presence</h3>
-        <p>Your content stays on your sector's page inside myBlueprint and on <a class="inline-link" href="https://launchpad.myblueprint.ca" target="_blank" rel="noopener">LaunchPad</a>, our free career video hub. Both are open with no login, so the link works in your own newsletter or careers page and reaches people well beyond myBlueprint schools.</p>
+        <p>Your content stays on your sector's page inside myBlueprint and on <a class="inline-link" href="https://launchpad.myblueprint.ca" target="_blank" rel="noopener">LaunchPad</a>, our free career video hub. Both are open with no login, so the link works in your own newsletter or careers page and reaches people well beyond myBlueprint.</p>
         <span class="effort-tag">Nothing to maintain. It stays up on its own.</span>
       </div>
       <div class="journey-card">
@@ -753,7 +716,7 @@
     <div class="section-head">
       <span class="eyebrow">What it looks like</span>
       <h2>Not a video library. A lesson a teacher can run cold.</h2>
-      <p>Prompts, pause points and a facilitation guide come built in. That is why your clip gets watched by a whole class instead of scrolled past.</p>
+      <p>Prompts, pause points, and a facilitation guide come built in. That is why your clip gets watched by a whole class instead of scrolled past.</p>
     </div>
 
     <div class="demo-tabs" role="tablist" aria-label="Product views">
@@ -777,8 +740,8 @@
             <span class="vframe-play"></span>
             <span class="vframe-time">1:08</span>
             <span class="vframe-lower">
-              <span class="n">[Name], 4 years in</span>
-              <span class="r">[Role] · [Your organization]</span>
+              <span class="n">[Name] &middot; [Role]</span>
+              <span class="r">[Your organization]</span>
             </span>
           </div>
           <div class="cl-col">
@@ -835,7 +798,7 @@
             <ul class="plan-list">
               <li>Three discussion prompts, timed to the pause points</li>
               <li>A one-page handout, print or share</li>
-              <li>Curriculum links across tech, health, business and science</li>
+              <li>Curriculum links across tech, health, business, and science</li>
               <li>An exit question that lands in the student's portfolio</li>
             </ul>
             <p class="tie-note">Written by myBlueprint, not by the partner. Editorial framing stays with us.</p>
@@ -852,7 +815,7 @@
       <div class="cl-body">
         <div class="res-grid">
           <div class="res-box"><div class="res-num">4,180</div><div class="res-lbl">clip views</div></div>
-          <div class="res-box"><div class="res-num">86%</div><div class="res-lbl">finished the collection</div></div>
+          <div class="res-box"><div class="res-num">148</div><div class="res-lbl">schools reached</div></div>
           <div class="res-box"><div class="res-num">612</div><div class="res-lbl">opened your partner page</div></div>
         </div>
         <div class="res-split">
@@ -869,7 +832,7 @@
             <div class="bar-row"><span class="k">Not for me</span><span class="bar-track"><span class="bar-fill" style="width:15%"></span></span><span class="v">15%</span></div>
           </div>
         </div>
-        <div class="privacy-note">Every figure is a board, school or grade total. No accounts, no names, no email addresses, no identity carried between surfaces.</div>
+        <div class="privacy-note">Every figure is a board, school, or grade total. No accounts, no names, no email addresses, no identity carried between surfaces.</div>
       </div>
     </div>
 
@@ -880,9 +843,9 @@
 <section id="national">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Outside Ontario</span>
-      <h2>The April launch is Ontario-only in 2027. Everything else already travels.</h2>
-      <p>If your organization operates elsewhere in Canada, there is a real way in this year, plus a head start on 2028.</p>
+      <span class="eyebrow">If you're outside Ontario</span>
+      <h2>The April launch is Ontario-only. LaunchPad already reaches students nationally.</h2>
+      <p>There is a real way in this year, and a head start on 2028.</p>
     </div>
     <div class="national-grid">
       <div class="national-col on">
@@ -913,10 +876,24 @@
   <div class="wrap">
     <span class="eyebrow" style="color:#8f93b5;">Let's talk</span>
     <h2 style="margin-top:14px;">Partner with us for April 2027.</h2>
-    <p>Content production runs through the winter, so partners confirm by January 2027. A short call now is enough to see whether it's a fit.</p>
+    <p>Content production runs through the winter, so the real deadline is January, not April. A short call now is enough to see whether it's a fit.</p>
+    <div class="dates">
+      <div class="date-item next">
+        <span class="date-k">By January 2027</span>
+        <span class="date-v">Partners confirm</span>
+      </div>
+      <div class="date-item">
+        <span class="date-k">By February 28, 2027</span>
+        <span class="date-v">Your clips are due</span>
+      </div>
+      <div class="date-item">
+        <span class="date-k">April 2027</span>
+        <span class="date-v">Launch</span>
+      </div>
+    </div>
     <div class="price-signal">
       <span class="price-signal-label">Your investment</span>
-      <p>An annual partnership, priced on the size of your organization and how many clips you contribute. Partners typically fund it from marketing, recruitment or workforce development budgets rather than a sponsorship line. We don't publish rates because the right number depends on your footprint &mdash; tell us roughly what you have in mind and we'll bring specific ones to the call.</p>
+      <p class="ps-lead">An annual partnership usually funded from marketing, recruitment, or workforce development budgets. Get in touch and we'll bring numbers to the call.</p>
     </div>
     <a class="btn-primary" href="mailto:partnerships@myblueprint.ca?subject=Career%20Launch%202027%20Partnership&amp;body=Hi%20myBlueprint%20team%2C%0A%0AWe%27d%20like%20to%20learn%20more%20about%20partnering%20on%20Career%20Launch%202027.%0A%0AOrganization%3A%20%0AWhat%20we%20do%3A%20%0AProvince%28s%29%20we%20operate%20in%3A%20%0ABudget%20range%20in%20mind%20%28optional%29%3A%20%0ABest%20person%20to%20contact%3A%20%0A%0AThanks%2C%0A">Book a call</a>
     <div class="final-note">We'll reply within two business days.</div>
@@ -925,8 +902,8 @@
 
 <footer>
   <div class="wrap">
-    <span>© myBlueprint, Career Launch 2027</span>
-    <span>April 2027 launch is Ontario-focused · LaunchPad, sector pages and the directory are national</span>
+    <span>© myBlueprint Corp.</span>
+    <span>April 2027 launch is Ontario-focused · LaunchPad, sector pages, and the directory are national</span>
   </div>
 </footer>
 
@@ -951,6 +928,84 @@
       }
     });
   });
+})();
+</script>
+
+<script>
+(function(){
+  var html = document.documentElement;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    html.className = html.className.replace(' js',''); return;
+  }
+
+  // Reveal at block level. Stagger only where the content is genuinely a set.
+  var singles = ['.proof .eyebrow','.proof-note','.proof-src','.logo-band-label',
+                 '#journey .section-head','.mockup-band .section-head','.demo-tabs',
+                 '.mock-caption','#national .section-head','.national-foot',
+                 '.final .eyebrow','.final h2','.price-signal','.final .btn-primary','.final-note'];
+  var groups  = ['.proof-item','.logo-cell','.journey-card','.national-col'];
+
+  singles.forEach(function(s){ var el = document.querySelector(s); if(el) el.classList.add('rv'); });
+  groups.forEach(function(s){
+    document.querySelectorAll(s).forEach(function(el,i){
+      el.classList.add('rv'); el.style.setProperty('--d', i);
+    });
+  });
+  var mf = document.querySelector('.mockup-band .mock-frame');
+  if(mf) mf.classList.add('rv');
+
+  function countUp(el){
+    var node = el.firstChild;
+    if(!node || node.nodeType !== 3) return;
+    var target = parseInt(node.nodeValue.replace(/[^0-9]/g,''), 10);
+    if(!target) return;
+    var t0 = null, dur = 1100;
+    node.nodeValue = '0';
+    requestAnimationFrame(function step(ts){
+      if(t0 === null) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      var e = 1 - Math.pow(1 - p, 4);              // easeOutQuart
+      node.nodeValue = Math.round(target * e).toLocaleString('en-CA');
+      if(p < 1) requestAnimationFrame(step);
+    });
+  }
+
+  function fillBars(scope){
+    scope.querySelectorAll('.bar-fill').forEach(function(b){
+      var w = b.dataset.w || b.style.width;
+      b.dataset.w = w; b.style.width = '0';
+      requestAnimationFrame(function(){
+        requestAnimationFrame(function(){ b.style.width = w; });
+      });
+    });
+  }
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting) return;
+      en.target.classList.add('in');
+      if(en.target.classList.contains('proof-item')){
+        var n = en.target.querySelector('.num');
+        if(n) setTimeout(function(){ countUp(n); }, 160);
+      }
+      if(en.target.classList.contains('mock-frame')) fillBars(en.target);
+      io.unobserve(en.target);
+    });
+  }, {threshold:0.2, rootMargin:'0px 0px -40px 0px'});
+
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+
+  document.querySelectorAll('.demo-tab').forEach(function(t){
+    t.addEventListener('click', function(){
+      var p = document.getElementById(t.getAttribute('aria-controls'));
+      if(p) setTimeout(function(){ fillBars(p); }, 20);
+    });
+  });
+
+  var bar = document.querySelector('.topbar');
+  addEventListener('scroll', function(){
+    bar.classList.toggle('scrolled', window.scrollY > 40);
+  }, {passive:true});
 })();
 </script>
 </body>
