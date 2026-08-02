@@ -7,7 +7,7 @@
 <meta name="description" content="Career Launch 2027: put your sector in front of students inside myBlueprint. An annual partnership launching April 2027, with year-round presence across sector pages, LaunchPad and teacher tools.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,600;1,9..144,700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#1a1a2e;
@@ -120,7 +120,7 @@
   .hero-actions{display:flex; gap:16px; flex-wrap:wrap; align-items:center;}
   /* Stat rule spans both columns, so the hero has a horizontal floor */
   .scale-strip{
-    display:grid; grid-template-columns:repeat(4,1fr);
+    display:grid; grid-template-columns:repeat(3,1fr);
     gap:28px;
     margin:52px 0 0; padding-top:26px;
     border-top:1px solid var(--line);
@@ -134,13 +134,58 @@
   .scale-num .plus{color:var(--blue-deep);}
   .scale-label{font-size:13.5px; color:#5c665e; margin-top:8px; max-width:24ch; line-height:1.45;}
 
-  /* Hero artifact: one clip, as a student sees it. The thesis, not a walkthrough. */
-  .hero-clip{display:flex; flex-direction:column; align-items:center;}
-  .hero-clip .vframe{max-width:236px; max-height:420px;}
-  .hero-clip .cap{
-    margin-top:18px; font-size:13px; color:#6f7768; text-align:center;
-    max-width:34ch; line-height:1.5;
+  /* Hero artifact: the partner page. The one thing a partner owns for twelve months,
+     and the only place on this page the directory is visible. Desktop only - see the
+     1040px breakpoint, where it is hidden rather than stacked. */
+  .rec{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:10px;
+    box-shadow:0 26px 54px -34px rgba(34,34,76,0.45);
+    overflow:hidden;
   }
+  .rec-top{
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    padding:12px 20px; background:var(--navy);
+  }
+  .rec-top .w{color:#fff; font-weight:700; font-size:14px;}
+  .rec-top .t{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:0.1em;
+    text-transform:uppercase; color:#a8b0d8;
+  }
+  .rec-body{padding:24px 24px 22px;}
+  .rec-org{display:flex; align-items:center; gap:14px; margin-bottom:18px;}
+  .rec-avatar{
+    width:46px; height:46px; border-radius:8px; flex:none;
+    background:var(--paper-dim); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono',monospace; font-size:10px; color:#8a8570;
+    text-align:center; line-height:1.2;
+  }
+  .rec-name{font-family:'Fraunces',serif; font-weight:600; font-size:19px; color:var(--navy);}
+  .rec-meta{font-size:12.5px; color:#6b7391;}
+  .rec-line{border:0; border-top:1px solid #ece9df; margin:0 0 14px;}
+  .rec-h{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--blue-deep); margin-bottom:11px;
+  }
+  .rec-tags{display:flex; flex-wrap:wrap; gap:7px; align-items:center;}
+  .rec-tag{
+    font-size:12.5px; border:1px solid #dcd6c4; border-radius:16px;
+    padding:5px 12px; color:#4d556f; background:var(--paper);
+  }
+  .rec-more{font-size:12px; color:#8a8570;}
+  .rec-foot{
+    display:flex; align-items:center; gap:10px;
+    margin-top:18px; padding-top:14px; border-top:1px solid #ece9df;
+    font-size:12px; color:#6b7391; flex-wrap:wrap;
+  }
+  .rec-stamp{
+    font-family:'IBM Plex Mono',monospace; font-size:11px;
+    color:#2c7a4b; background:#e8f4ec; border:1px solid #c9e4d3;
+    border-radius:4px; padding:4px 9px; white-space:nowrap;
+  }
+  .rec-cap{margin-top:16px; font-size:13px; color:#6f7768; line-height:1.55;}
   .btn-primary{
     background:var(--navy); color:var(--white);
     font-weight:600; font-size:15.5px;
@@ -497,15 +542,13 @@
 
   /* ===== Responsive ===== */
   @media (max-width:1040px){
-    .hero-grid{grid-template-columns:1fr; gap:44px;}
-    .hero-clip{align-items:flex-start;}
-    .hero-clip .cap{text-align:left;}
-    .scale-strip{grid-template-columns:repeat(2,1fr); gap:24px;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-art{display:none;}
+    .scale-strip{grid-template-columns:repeat(3,1fr); gap:24px;}
     .logo-row{grid-template-columns:repeat(3,1fr);}
   }
   @media (max-width: 860px){
     .proof-grid{grid-template-columns:1fr; gap:20px;}
-    .hero-clip .vframe{max-width:190px; max-height:340px;}
     .journey-grid{grid-template-columns:1fr;}
     .journey-card{border-right:none; border-bottom:1px solid var(--line);}
     .journey-card:last-child{border-bottom:none;}
@@ -578,7 +621,7 @@
     <div class="hero-grid">
       <div>
         <span class="eyebrow">Career Launch 2027 &middot; Industry Partnership</span>
-        <h1>Show students what <span class="hl">your industry actually looks like.</span></h1>
+        <h1>Get in front of students <span class="hl">before they’ve picked a path.</span></h1>
         <p class="lede">myBlueprint is where Canadian students plan their education and career paths. Career Launch puts employers, industry associations and post-secondary institutions inside that experience year-round, with an annual launch every April.</p>
         <div class="hero-actions">
           <a class="btn-primary" href="#connect">Book a call</a>
@@ -586,18 +629,36 @@
         </div>
       </div>
 
-      <div class="hero-clip">
-        <div class="vframe">
-          <span class="vframe-glow"></span>
-          <span class="vframe-cc">CC &middot; EN/FR</span>
-          <span class="vframe-play"></span>
-          <span class="vframe-time">1:08</span>
-          <span class="vframe-lower">
-            <span class="n">[Name], 4 years in</span>
-            <span class="r">[Role] &middot; [Your organization]</span>
-          </span>
+      <div class="hero-art">
+        <div class="rec">
+          <div class="rec-top">
+            <span class="w">Your partner page</span>
+            <span class="t">Educator view</span>
+          </div>
+          <div class="rec-body">
+            <div class="rec-org">
+              <div class="rec-avatar">YOUR<br>LOGO</div>
+              <div>
+                <div class="rec-name">[Your organization]</div>
+                <div class="rec-meta">[Sector] &middot; <b>12 km from this school</b> &middot; 4 clips</div>
+              </div>
+            </div>
+            <hr class="rec-line">
+            <div class="rec-h">What you'll support</div>
+            <div class="rec-tags">
+              <span class="rec-tag">Guest speaker (virtual)</span>
+              <span class="rec-tag">Apprenticeships / OYAP</span>
+              <span class="rec-tag">Field trip facilitation</span>
+              <span class="rec-tag">Certification training</span>
+              <span class="rec-more">+5 more</span>
+            </div>
+            <div class="rec-foot">
+              <span class="rec-stamp">Reconfirmed at renewal</span>
+              <span>Your Career Launch presence and your year-round entry, on one page.</span>
+            </div>
+          </div>
         </div>
-        <p class="cap">One clip, 45 to 90 seconds, credited to you &mdash; inside the lesson a teacher runs with the whole class.</p>
+        <p class="rec-cap">Educators search by sector and by distance from their school. You state what you'll support &mdash; capability, never live postings.</p>
       </div>
     </div>
 
@@ -606,7 +667,6 @@
       <div class="scale-item"><span class="scale-num">1M<span class="plus">+</span></span><span class="scale-label">active students</span></div>
       <div class="scale-item"><span class="scale-num">300<span class="plus">+</span></span><span class="scale-label">school boards across Canada</span></div>
       <div class="scale-item"><span class="scale-num">7&ndash;12</span><span class="scale-label">grades, from middle school up</span></div>
-      <div class="scale-item"><span class="scale-num">Zero</span><span class="scale-label">student names, emails or accounts collected</span></div>
     </div>
   </div>
 </header>
@@ -848,7 +908,7 @@
     <h2 style="margin-top:14px;">Partner with us for April 2027.</h2>
     <p>Content production runs through the winter, so partners confirm by January 2027. A short call now is enough to see whether it's a fit.</p>
     <div class="price-signal">
-      <span class="price-signal-label">What it costs</span>
+      <span class="price-signal-label">Your investment</span>
       <p>An annual partnership, priced on the size of your organization and how many clips you contribute. Partners typically fund it from marketing, recruitment or workforce development budgets rather than a sponsorship line. We don't publish rates because the right number depends on your footprint &mdash; tell us roughly what you have in mind and we'll bring specific ones to the call.</p>
     </div>
     <a class="btn-primary" href="mailto:partnerships@myblueprint.ca?subject=Career%20Launch%202027%20Partnership&amp;body=Hi%20myBlueprint%20team%2C%0A%0AWe%27d%20like%20to%20learn%20more%20about%20partnering%20on%20Career%20Launch%202027.%0A%0AOrganization%3A%20%0AWhat%20we%20do%3A%20%0AProvince%28s%29%20we%20operate%20in%3A%20%0ABudget%20range%20in%20mind%20%28optional%29%3A%20%0ABest%20person%20to%20contact%3A%20%0A%0AThanks%2C%0A">Book a call</a>
