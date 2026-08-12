@@ -280,10 +280,11 @@
     display:inline-flex; align-items:center; gap:8px; align-self:flex-start;
     font-family:var(--sans); font-size:13px; font-weight:500;
     letter-spacing:0.1em; text-transform:uppercase;
-    padding:7px 14px; border-radius:3px; margin-bottom:16px;
+    padding:0 0 9px; border-radius:0; margin-bottom:18px;
+    border-bottom:2px solid currentColor;
   }
-  .national-col.on .tag{background:var(--blue); color:#fff;}
-  .national-col.off .tag{background:transparent; color:var(--blue-deep); border:1.5px solid rgba(21,83,255,0.4);}
+  .national-col.on .tag{background:none; color:#8ecbff;}
+  .national-col.off .tag{background:none; color:var(--blue-deep);}
   .national-col .tag::before{
     content:""; width:8px; height:8px; border-radius:50%; flex:none;
     background:currentColor;
@@ -402,6 +403,46 @@
     font-size:13px; color:#6e6a59; font-weight:600;
     letter-spacing:0.04em; min-width:46px; text-align:center;
   }
+  /* ---- mobile: the teacher panel is the tallest of the three, and the plan
+     card falling below the fold made it unreadable without scrolling in two
+     directions. Below 620px the panel becomes a single column that fits, with
+     the supporting detail collapsed behind the control that already promised
+     it ("Open the lesson plan"). Nothing is removed, it is disclosed. */
+  @media (max-width:620px){
+    .demo-bar{gap:8px;}
+    .demo-count{display:none;}          /* the tabs already show position */
+    .demo-hint{margin:-6px 0 12px;}
+
+    .teach-split{gap:14px;}
+    .teach-lead{margin-bottom:4px;}
+    .teach-sub{margin-bottom:14px; font-size:13px;}
+    .mode-row{margin-bottom:14px;}
+    .mode-pill{font-size:12px; padding:7px 12px;}
+    .coll-row{padding:11px 14px; font-size:13px;}
+
+    /* progressive disclosure without JS: the label is the summary */
+    .plan-card{padding:0; border:none; background:none;}
+    .plan-card .plan-h{
+      display:block; margin:0; padding:13px 16px;
+      background:#fff; border:1px solid #dfe3ef; border-radius:8px;
+      font-size:11px; cursor:pointer; position:relative;
+    }
+    .plan-card .plan-h::after{
+      content:"+"; position:absolute; right:14px; top:50%;
+      transform:translateY(-50%); font-size:15px; line-height:1;
+      color:var(--blue-deep); font-weight:700;
+    }
+    .plan-card .plan-list,.plan-card .tie-note{display:none;}
+    .plan-card.open .plan-list,.plan-card.open .tie-note{
+      display:block; background:#fff; border:1px solid #dfe3ef;
+      border-top:none; border-radius:0 0 8px 8px; padding:14px 16px;
+      margin:0;
+    }
+    .plan-card.open .plan-h{border-radius:8px 8px 0 0;}
+    .plan-card.open .plan-h::after{content:"\2212";}
+    .plan-card.open .tie-note{border-top:1px solid #eef0f6; padding-top:12px;}
+    .coll-cta{margin-bottom:14px;}
+  }
   .demo-count b{color:var(--navy);}
   .demo-hint{
     display:none; font-size:12.5px; color:#6e6a59; margin:-10px 0 16px;
@@ -476,9 +517,14 @@
   }
   .coll-row:last-child{border-bottom:none;}
   .coll-row .dur{font-family:var(--sans); font-size:11px; color:#666d85;}
+  /* This lives inside a screenshot of another product. Rendered as a solid blue
+     button it competes with the page's own CTAs and reads as something you can
+     click here. Outlined keeps it legible as an interface element without
+     impersonating an action on this page. */
   .coll-cta{
     display:inline-block; margin-top:16px; font-size:12.5px; font-weight:600;
-    color:#fff; background:var(--blue-deep); padding:9px 16px; border-radius:5px;
+    color:var(--blue-deep); background:#fff; padding:8px 15px;
+    border:1.5px solid rgba(21,83,255,0.45); border-radius:5px;
   }
   .plan-card{background:#fff; border:1px solid #dfe3ef; border-radius:8px; padding:18px 20px;}
   .plan-h{
@@ -530,13 +576,32 @@
     border-left:1px solid rgba(255,255,255,0.11);
   }
   .date-item:first-child{border-left:none;}
+  /* MAINTENANCE: this marks the next date due, so it is wrong from 2 March 2027.
+     Move the "next" class to the following .date-item, or drop it entirely once
+     the cohort has closed. */
   .date-item.next{background:rgba(41,98,255,0.10);}
+  .date-item.next::after{
+    content:""; position:absolute; left:0; right:0; top:0;
+    height:3px; background:var(--blue);
+  }
   .date-k{
     display:block; margin-bottom:6px;
     font-family:var(--sans); font-size:12.5px;
     letter-spacing:0.06em; text-transform:uppercase; color:#8ecbff;
   }
   .date-item.next .date-k{color:#fff;}
+  .date-item{transition:background .2s ease;}
+  .date-item::before{
+    content:""; position:absolute; left:0; right:0; top:0; height:0;
+    background:var(--blue); transition:height .2s ease;
+  }
+  .date-item{position:relative;}
+  /* hover has to differ from .next or the default reads as a stuck hover */
+  .date-item:hover{background:rgba(255,255,255,0.055);}
+  .date-item:hover::before{height:3px; background:rgba(255,255,255,0.5);}
+  .date-item.next:hover{background:rgba(41,98,255,0.17);}
+  .date-item:hover .date-k{color:#fff;}
+  .date-item:hover .date-v{color:var(--white);}
   .date-v{font-size:14.5px; color:#c3ccc6;}
 
   .price-signal{
@@ -630,9 +695,17 @@
 
   /* This was a mono block, which is why 12px worked. As a sans it needs the
      size back and reads better as sentence case at normal weight. */
+  /* Section 14.2 names "partner effort" as a labelled field, which the
+     unlabelled tag had quietly lost. The label restores it and gives the
+     block something to lead with. */
   .effort-tag{
     font-size:13px; font-weight:500; line-height:1.52;
-    letter-spacing:0.004em; padding:11px 14px;
+    letter-spacing:0.004em; padding:11px 14px; color:var(--navy-deep);
+  }
+  .effort-tag::before{
+    content:"Your part"; display:block;
+    font-size:10px; font-weight:900; letter-spacing:0.18em;
+    text-transform:uppercase; color:var(--blue-deep); margin-bottom:5px;
   }
 
   /* Small text at 500 loses definition; a little tracking buys it back. */
@@ -642,6 +715,149 @@
   /* UI weights stated rather than left to resolve. */
   .btn-primary,.btn-ghost,.topbar-cta,.demo-tab{font-weight:700; letter-spacing:0.006em;}
   .inline-link{font-weight:700;}
+
+
+  /* ============================================================
+     REDESIGN LAYER  (body.redesign)
+     One voice, so hierarchy has to come from somewhere other than a change
+     of typeface. Four substitutions, in order of how much work they do:
+       1. Wider size jumps        (was: serif vs sans)
+       2. Rules and white space   (was: mono labels)
+       3. Colour and weight       (was: stroke contrast)
+       4. Numerals as texture     (was: the display face)
+     Nothing here touches markup or copy.
+     ============================================================ */
+
+  body.redesign{font-size:16.5px; line-height:1.6; color:#22252e;}
+  body.redesign section{padding:104px 0;}
+
+  /* ---- 1. a wider scale. the old ramp was 17.5 -> 38, about 2.2x.
+           this is about 3x, which is what carries hierarchy without a serif. */
+  body.redesign .hero{padding:104px 0 84px;}
+  body.redesign .hero h1{
+    font-size:clamp(42px, 6.6vw, 84px);
+    line-height:0.93; letter-spacing:-0.042em;
+    max-width:24ch; margin:26px 0 30px;
+  }
+  /* The chip stays. It is the one place on the page where a flat, single-family
+     layout gets a genuine graphic moment, and at this size it reads as a
+     deliberate mark rather than as compensation for a weak heading.
+     Retuned for 84px: the padding and radius that suited 64px look clumsy here,
+     and the ground is lightened because the type it sits behind is heavier. */
+  body.redesign .hero h1 .hl{
+    font-weight:900; color:var(--blue);
+    background:rgba(41,98,255,0.13);
+    padding:0.015em 0.11em; margin:0 -0.03em;
+    border-radius:2px;
+  }
+  body.redesign .hero p.lede{
+    font-size:20px; line-height:1.52; max-width:56ch; color:#5a6068; font-weight:500;
+  }
+  body.redesign .section-head h2,body.redesign .final h2{
+    font-size:clamp(31px, 4.1vw, 50px);
+    line-height:0.99; letter-spacing:-0.036em;
+  }
+  body.redesign .section-head p{font-size:17px; color:#5a6068; max-width:64ch;}
+  body.redesign .journey-card h3,body.redesign .national-col h3{font-size:19px;}
+  body.redesign .journey-card p{font-size:15.5px; line-height:1.6; color:#565d66;}
+
+  /* ---- 2. rules and space. every label gets a hairline in front of it, which
+           is the job the mono was doing: marking a change of register. */
+  body.redesign .eyebrow,
+  body.redesign .logo-band-label{
+    display:inline-flex; align-items:center; gap:12px;
+    font-size:11px; font-weight:900; letter-spacing:0.22em;
+  }
+  /* No dash before eyebrows. Applied only to floating labels it was hard to
+     read as a rule, and applied everywhere it collided with the full-width
+     section rule 30px above. Labels are anchored by space and weight instead. */
+  body.redesign .logo-band-label{justify-content:center;}
+  body.redesign .section-head{
+    border-top:2px solid var(--ink); padding-top:24px; margin-bottom:44px;
+  }
+  /* the head splits: label in the margin, statement in the field. asymmetry
+     does the work a change of typeface used to do. */
+  @media (min-width:1000px){
+    body.redesign .section-head{
+      display:grid; grid-template-columns:148px 1fr; column-gap:36px; align-items:start;
+    }
+    body.redesign .section-head .eyebrow{grid-column:1; grid-row:1; padding-top:9px;}
+    body.redesign .section-head h2{grid-column:2; grid-row:1; margin:0 0 14px;}
+    body.redesign .section-head p{grid-column:2; grid-row:2;}
+  }
+
+  /* ---- 3. flatten. rounded boxes and shadows were softening a page that had
+           a serif to give it warmth. without one, edges should be honest. */
+  body.redesign .journey-grid,
+  body.redesign .national-grid{border-radius:0; border-color:#cfc8b4;}
+  body.redesign .journey-grid{border-left:none; border-right:none; border-bottom:none; border-top:1px solid #cfc8b4;}
+  body.redesign .journey-card{padding:34px 26px 30px; border-right:1px solid #e2dccb;}
+  body.redesign .journey-card:last-child{border-right:none;}
+  body.redesign .btn-primary,body.redesign .btn-ghost,
+  body.redesign .topbar-cta,body.redesign .effort-tag{border-radius:0;}
+  body.redesign .btn-primary{padding:17px 32px;}
+
+  /* ---- 4. numerals as the display element. the step number replaces the
+           accent bar, so the sequence is stated rather than implied. */
+  body.redesign .journey-grid{counter-reset:step;}
+  body.redesign .journey-card{counter-increment:step;}
+  body.redesign .journey-card::after{display:none;}
+  body.redesign .journey-card::before{
+    content:counter(step, decimal-leading-zero);
+    display:block; font-size:34px; font-weight:900;
+    letter-spacing:-0.04em; line-height:1;
+    color:rgba(41,98,255,0.26); margin-bottom:16px;
+    font-variant-numeric:tabular-nums;
+    transition:color .22s ease;
+  }
+  body.redesign .journey-card:hover::before{color:var(--blue);}
+  /* flat layout has no box to shade, so hover is the numeral and the heading.
+     the base hover rules are more specific, so they are unset here. */
+  body.redesign .journey-card:hover{background:transparent;}
+  body.redesign .journey-card:hover .effort-tag{
+    background:none; border-left:none; border-top-color:var(--blue);
+  }
+  body.redesign .journey-card:hover p{color:#565d66;}
+  body.redesign .journey-grid:hover .journey-card:not(:hover){opacity:1;}
+  body.redesign .journey-card:hover h3{color:var(--blue-deep);}
+  body.redesign .effort-tag::before{color:var(--blue-deep);}
+  body.redesign .journey-num{
+    display:block; font-size:11px; font-weight:900; letter-spacing:0.18em;
+    color:var(--blue-deep); margin-bottom:6px;
+  }
+  body.redesign .journey-card h3{margin:0 0 12px;}
+  body.redesign .effort-tag{
+    background:none; border-left:none; border-top:1px solid #e2dccb;
+    padding:14px 0 0; font-size:13px; color:#5a6068;
+  }
+
+  /* figures carry the page where a display face used to */
+  body.redesign .proof{padding:76px 0 70px;}
+  body.redesign .proof-item .num{
+    font-size:clamp(40px,5.4vw,66px); font-weight:900; letter-spacing:-0.042em;
+  }
+  body.redesign .proof-item .label{font-size:14px; color:#b6bcdd; max-width:22ch;}
+  body.redesign .scale-num{font-size:clamp(28px,3.2vw,42px); letter-spacing:-0.04em;}
+  body.redesign .scale-num.wide{font-size:clamp(25px,2.8vw,37px);}
+  body.redesign .scale-strip{
+    border-top:2px solid var(--ink); border-bottom:1px solid var(--line);
+    padding:26px 0;
+  }
+  body.redesign .scale-label{font-size:13.5px; letter-spacing:0.01em;}
+
+  body.redesign .national-col{padding:42px 40px 38px;}
+  body.redesign .national-col .tag{border-radius:0; font-size:11px; letter-spacing:0.2em; font-weight:900;}
+  body.redesign .res-num{font-size:32px; letter-spacing:-0.035em;}
+  body.redesign .date-k{font-size:11px; letter-spacing:0.18em; font-weight:900;}
+  body.redesign .date-v{font-size:15px;}
+
+  @media (max-width:860px){
+    body.redesign section{padding:68px 0;}
+    body.redesign .scale-item{border-right:none; padding-right:0;}
+    body.redesign .journey-card{border-right:none;}
+  }
+
+
 
   /* ===== Responsive ===== */
   @media (max-width:1040px){
@@ -764,7 +980,12 @@
   }
 </style>
 </head>
-<body>
+<!-- Redesign layout. Hierarchy is carried by scale, rules, colour and
+     numerals rather than by a change of typeface, because the type system
+     is a single family (Section 14.9 Branding).
+     "dash-float" limits the eyebrow dash to labels with no section rule
+     above them. Remove that class for a dash on every eyebrow. -->
+<body class="redesign dash-float">
 
 <div class="topbar">
   <div class="wrap">
@@ -781,14 +1002,15 @@
     <!-- Section 16.8. Figures verified Sept 1 2025 - June 2026. "300+ boards" is
          retired everywhere: the unit is districts AND Ministry partners, a broader
          category than school boards. "1.2M active users" is not "1.2M students" -
-         do not relabel it. This strip is platform scale, which is the distribution
+         do not relabel it. The window is Sept 1 2025 to June 2026, carried in the
+         label as (2025-26); update both together or the figure ages silently.
+         This strip is platform scale, which is the distribution
          argument. It is not a Career Launch audience claim and must not be used as one. -->
     <div class="scale-strip">
-      <div class="scale-item"><span class="scale-num wide">1.2 million</span><span class="scale-label">active users on the platform</span></div>
-      <div class="scale-item"><span class="scale-num">200<span class="plus">+</span></span><span class="scale-label">districts and Ministries of Education</span></div>
-      <div class="scale-item"><span class="scale-num">7&ndash;12</span><span class="scale-label">grades, from middle school up</span></div>
+      <div class="scale-item"><span class="scale-num wide">1.2 million</span><span class="scale-label">active users (2025&ndash;26)</span></div>
+      <div class="scale-item"><span class="scale-num">200<span class="plus">+</span></span><span class="scale-label">districts and Ministries</span></div>
+      <div class="scale-item"><span class="scale-num">7&ndash;12</span><span class="scale-label">middle school and up</span></div>
     </div>
-    <p class="scale-src">Measured September 2025 to June 2026.</p>
     <div class="hero-actions">
       <a class="btn-primary" href="#connect">Book a call</a>
       <a class="btn-ghost" href="#proof">See what year one did &darr;</a>
@@ -857,7 +1079,7 @@
       </div>
       <div class="journey-card">
         <span class="journey-num">Spring 2027</span>
-        <h3>Sector pages and the directory</h3>
+        <h3>Sector pages and directory</h3>
         <p>Your content lands on your sector&rsquo;s page, one of 23 national sector pages inside myBlueprint. Tell us what you can offer students, such as a site tour or a co-op placement, and nearby educators can find you in the directory.</p>
         <span class="effort-tag">Your clips and your details in by March 1, 2027.</span>
       </div>
@@ -959,7 +1181,7 @@
         <div class="teach-split">
           <div>
             <p class="teach-lead">Open one tab. Press play. That is the prep.</p>
-            <p class="teach-sub">Pause points become whole-class discussion. No devices, no prep.</p>
+            <p class="teach-sub">Pause points become whole-class discussion. The collection needs no prep. The lesson plan is there when you want to teach it properly.</p>
             <div class="mode-row">
               <span class="mode-pill on">I'll project it</span>
               <span class="mode-pill">Students on devices</span>
@@ -972,12 +1194,12 @@
             <span class="coll-cta">Open the lesson plan</span>
           </div>
           <div class="plan-card">
-            <p class="plan-h">In the lesson plan</p>
+            <p class="plan-h">If you want to go further</p>
             <ul class="plan-list">
-              <li>Three discussion prompts, timed to the pause points</li>
-              <li>A one-page handout, print or share</li>
-              <li>Curriculum links across tech, health, business, and science</li>
-              <li>An exit question that lands in the student's portfolio</li>
+              <li>Ties the collection to your curriculum outcomes, not just the sector</li>
+              <li>Extends the discussion beyond the prompts built into the clips</li>
+              <li>Sets an expectation students complete in myBlueprint</li>
+              <li>Printable, so it works with or without devices</li>
             </ul>
             <p class="tie-note">Written by myBlueprint, not by the partner. Editorial framing stays with us.</p>
           </div>
@@ -1076,7 +1298,7 @@
     </div>
     <div class="price-signal">
       <span class="price-signal-label">Your investment</span>
-      <p class="ps-lead">An annual partnership usually funded from marketing, recruitment, or workforce development budgets. Get in touch and we'll bring numbers to the call.</p>
+      <p class="ps-lead">An annual partnership, usually funded from marketing, recruitment, or workforce development budgets. We'll bring numbers to the call.</p>
     </div>
     <a class="btn-primary" href="mailto:partnerships@myblueprint.ca?subject=Career%20Launch%202027%20Partnership&amp;body=Hi%20myBlueprint%20team%2C%0A%0AWe%27d%20like%20to%20learn%20more%20about%20partnering%20on%20Career%20Launch%202027.%0A%0AOrganization%3A%20%0AWhat%20we%20do%3A%20%0AProvince%28s%29%20we%20operate%20in%3A%20%0ABudget%20range%20in%20mind%20%28optional%29%3A%20%0ABest%20person%20to%20contact%3A%20%0A%0AThanks%2C%0A">Book a call</a>
     <div class="final-note">We'll reply within two business days.</div>
@@ -1122,6 +1344,23 @@
       if(e.key === 'ArrowLeft'){  e.preventDefault(); select(i - 1, true); }
     });
   });
+  // on small screens the plan card is a disclosure; the heading is its control
+  var planCard = document.querySelector('.plan-card');
+  var planH = planCard && planCard.querySelector('.plan-h');
+  if(planH){
+    planH.setAttribute('role','button');
+    planH.setAttribute('tabindex','0');
+    planH.setAttribute('aria-expanded','false');
+    var togglePlan = function(){
+      var open = planCard.classList.toggle('open');
+      planH.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    planH.addEventListener('click', togglePlan);
+    planH.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); togglePlan(); }
+    });
+  }
+
   if(prev) prev.addEventListener('click', function(){ select(cur - 1); });
   if(next) next.addEventListener('click', function(){ select(cur + 1); });
 
@@ -1221,5 +1460,7 @@
   }, {passive:true});
 })();
 </script>
+
+
 </body>
 </html>
