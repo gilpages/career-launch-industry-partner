@@ -252,9 +252,9 @@
     top:0; left:0; right:0; height:3px;
   }
   .journey-card:nth-child(1)::after{background:var(--blue);}
-  .journey-card:nth-child(2)::after{background:rgba(41,98,255,0.45);}
-  .journey-card:nth-child(3)::after{background:rgba(41,98,255,0.28);}
-  .journey-card:nth-child(4)::after{background:rgba(41,98,255,0.14);}
+  .journey-card:nth-child(2)::after{background:rgba(41,98,255,0.62);}
+  .journey-card:nth-child(3)::after{background:rgba(41,98,255,0.42);}
+  .journey-card:nth-child(4)::after{background:rgba(41,98,255,0.26);}
   .journey-card h3{font-size:21px; margin:12px 0 10px;}
   .journey-card p{font-size:16px; color:#4a544c; margin:0 0 22px;}
   .effort-tag{
@@ -730,10 +730,27 @@
   .topbar{transition:box-shadow .22s ease;}
   .topbar.scrolled{box-shadow:0 6px 22px -14px rgba(34,34,76,0.45);}
 
-  .journey-card{transition:background .2s ease;}
-  .journey-card:hover{background:#fffefa;}
-  .journey-card::after{transition:height .2s ease;}
-  .journey-card:hover::after{height:5px;}
+  /* These cards are not links, so the hover stays a legibility cue rather than
+     an affordance: no lift, no shadow, nothing that invites a click that goes
+     nowhere. What it does is bring the hovered step to full strength while the
+     others sit back, so the sequence reads one stage at a time. */
+  .journey-card{transition:background .22s ease;}
+  .journey-card:hover{background:var(--white);}
+  .journey-card::after{transition:height .22s ease, background .22s ease;}
+  .journey-card:hover::after{height:6px; background:var(--blue);}
+  .journey-num,.journey-card h3,.journey-card p,.effort-tag{
+    transition:color .22s ease, background .22s ease, border-color .22s ease;
+  }
+  .journey-card:hover .journey-num{color:var(--blue-deep);}
+  .journey-card:hover p{color:#3a443c;}
+  .journey-card:hover .effort-tag{background:#efeadb; border-left-color:var(--blue-deep);}
+
+  /* Dim the siblings only while the pointer is genuinely inside the grid, and
+     only on devices that have a pointer at all. */
+  @media (hover:hover) and (pointer:fine){
+    .journey-grid:hover .journey-card:not(:hover){opacity:0.74;}
+    .journey-card{transition:background .22s ease, opacity .22s ease;}
+  }
 
   .res-box{transition:transform .2s ease, box-shadow .2s ease;}
   .res-box:hover{transform:translateY(-2px); box-shadow:0 10px 22px -16px rgba(34,34,76,0.5);}
