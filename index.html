@@ -559,6 +559,90 @@
   }
   footer .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;}
 
+
+  /* ============================================================
+     MUSEO SANS TUNING
+     The metrics above were set for Fraunces + Source Sans + IBM Plex Mono.
+     Museo Sans is wider, has a taller x-height, lower stroke contrast, and a
+     coarse weight ramp (100/300/500/700/900 - no 400, no 600). Everything in
+     this block is a consequence of one of those four facts.
+     Weight 300 is not currently in the Adobe web project, so nothing uses it.
+     ============================================================ */
+
+  /* No 400 exists, so body copy resolves to 500, which is a touch heavy at the
+     old size. Drop a half-point and open the leading: wide letterforms need
+     more room between lines, not less. */
+  body{
+    font-size:17px;
+    line-height:1.62;
+    -moz-osx-font-smoothing:grayscale;
+  }
+
+  /* Geometric caps at 900 need noticeably tighter tracking than a serif did,
+     and the line-height has to close up or display sizes look gappy. */
+  /* balance evens out line lengths; on h1 it also pulls the block narrower,
+     so it is left to h2 where the headlines are short enough to benefit. */
+  h2{text-wrap:balance;}
+  h1{text-wrap:pretty;}
+  .hero h1{
+    font-size:clamp(38px, 5.2vw, 64px);
+    line-height:1.0;
+    letter-spacing:-0.034em;
+    /* ch is the width of "0" in the CURRENT font. Museo's zero is much wider
+       than Fraunces', so the inherited 17ch measure collapsed the headline to
+       four short lines. Set in ch deliberately, sized for two to three. */
+    max-width:26ch;
+  }
+  /* The emphasis was 700 against a 600 serif. Against 900 it read as a step
+     DOWN in weight, which inverted the emphasis. Colour and ground carry it. */
+  .hero h1 .hl{font-weight:900; padding:0.02em 0.14em;}
+
+  .section-head h2,.final h2{letter-spacing:-0.028em; line-height:1.04;}
+  .journey-card h3,.national-col h3{letter-spacing:-0.008em; line-height:1.18;}
+
+  /* Museo is wide, so the same character count is a longer physical line.
+     Shorter measures keep the eye returning cleanly. */
+  .hero p.lede{
+    font-size:19px; line-height:1.56; max-width:58ch; color:#39433c;
+  }
+  .section-head p,.proof-note{max-width:58ch; line-height:1.58;}
+
+  /* Uppercase micro-labels. Mono carried its own spacing; a geometric sans has
+     none built in, so it has to be added or the caps clot together.
+     600 does not exist in Museo and silently resolves to 700, so it is stated. */
+  .eyebrow{font-weight:700; letter-spacing:0.17em; font-size:12px;}
+  .logo-band-label{font-weight:700; letter-spacing:0.17em;}
+  .journey-num{font-weight:700; letter-spacing:0.15em; font-size:11.5px;}
+  .national-col .tag{font-weight:700; letter-spacing:0.13em; font-size:12px;}
+  .national-col .col-sub{font-weight:700; letter-spacing:0.11em; font-size:12px;}
+  .date-k{font-weight:700; letter-spacing:0.11em; font-size:12px;}
+  .cl-tag,.price-signal-label{font-weight:700; letter-spacing:0.12em;}
+
+  /* Mono gave every figure the same width. Museo does not, unless asked. */
+  .num,.res-num,.scale-num,.date-k,.bar-row .v,.coll-row .dur,.demo-count,
+  .vframe-time,.proof-item .num{
+    font-variant-numeric:tabular-nums;
+    font-feature-settings:"tnum" 1;
+  }
+  .scale-num{letter-spacing:-0.03em;}
+  .proof-item .num{font-weight:700; letter-spacing:-0.026em;}
+  .res-num{letter-spacing:-0.022em;}
+
+  /* This was a mono block, which is why 12px worked. As a sans it needs the
+     size back and reads better as sentence case at normal weight. */
+  .effort-tag{
+    font-size:13px; font-weight:500; line-height:1.52;
+    letter-spacing:0.004em; padding:11px 14px;
+  }
+
+  /* Small text at 500 loses definition; a little tracking buys it back. */
+  .mock-credit,.privacy-note,.mock-caption,.scale-src,.final-note,
+  .national-foot,.tie-note{letter-spacing:0.008em;}
+
+  /* UI weights stated rather than left to resolve. */
+  .btn-primary,.btn-ghost,.topbar-cta,.demo-tab{font-weight:700; letter-spacing:0.006em;}
+  .inline-link{font-weight:700;}
+
   /* ===== Responsive ===== */
   @media (max-width:1040px){
     .logo-cell{height:54px;}   /* still five across; only the cell shortens */
