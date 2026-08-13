@@ -441,12 +441,22 @@
     .plan-card.open .plan-h{border-radius:8px 8px 0 0;}
     .plan-card.open .plan-h::after{content:"\2212";}
     .plan-card.open .tie-note{border-top:1px solid #eef0f6; padding-top:12px;}
-    .coll-cta{margin-bottom:14px;}
+    /* the lesson control joins the mode row so it stops costing its own band */
+    .teach-modes{display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+    .teach-modes .coll-cta{margin:0 0 0 auto; padding:7px 12px; font-size:12px;}
+    .mode-row{margin-bottom:0;}
+    .coll-list{margin-top:12px;}
   }
   .demo-count b{color:var(--navy);}
-  .demo-hint{
-    display:none; font-size:12.5px; color:#6e6a59; margin:-10px 0 16px;
-  }
+  /* Chevrons ride the edge of the frame instead of sitting in their own band
+     above it. Hidden wherever a fine pointer exists, since the tabs and the
+     header arrows already serve that case. */
+  .demo-shell{position:relative;}
+  /* All three panels share one grid cell, so the frame is always as tall as the
+     tallest view and switching never resizes the page under your thumb.
+     visibility rather than display keeps the height while removing the hidden
+     panels from the accessibility tree. */
+
   @media (prefers-reduced-motion: no-preference){
     .demo-panel.slide{animation:panelIn .28s cubic-bezier(.22,.61,.24,1);}
   }
@@ -465,7 +475,6 @@
   }
   .demo-tab:hover{color:var(--navy);}
   .demo-tab[aria-selected="true"]{background:var(--navy); color:#fff;}
-  .demo-panel[hidden]{display:none;}
 
   .cl-chrome{
     display:flex; align-items:center; justify-content:space-between; gap:12px;
@@ -545,7 +554,18 @@
   .res-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:26px;}
   .res-box{background:#fff; border:1px solid #dfe3ef; border-radius:8px; padding:16px; text-align:center;}
   .res-num{font-family:var(--sans); font-weight:600; font-size:26px; color:var(--navy); line-height:1;}
-  .res-lbl{font-size:11.5px; color:#666d85; margin-top:6px;}
+  .res-lbl{font-size:11.5px; color:#666d85; margin-top:5px; line-height:1.32;}
+  @media (max-width:620px){
+    .res-grid{gap:8px; margin-bottom:20px;}
+    .res-box{padding:12px 8px;}
+    .res-num{font-size:22px;}
+    .res-lbl{font-size:10.5px;}
+    .res-split{gap:18px;}
+    .bar-row{margin-bottom:6px; font-size:12px; gap:9px;}
+    .bar-row .k{width:88px;}
+    .privacy-note{font-size:11.5px; line-height:1.45;}
+    .cl-body{padding:16px 14px;}
+  }
   .res-split{display:grid; grid-template-columns:1fr 1fr; gap:30px;}
   .bar-row{display:flex; align-items:center; gap:12px; margin-bottom:8px; font-size:12.5px;}
   .bar-row .k{width:104px; color:#4d556f; flex:none;}
@@ -772,19 +792,17 @@
      read as a rule, and applied everywhere it collided with the full-width
      section rule 30px above. Labels are anchored by space and weight instead. */
   body.redesign .logo-band-label{justify-content:center;}
+  /* A hairline, not a bar. At 2px in the ink colour it read as a divider
+     between sections rather than as the top edge of this one. */
   body.redesign .section-head{
-    border-top:2px solid var(--ink); padding-top:24px; margin-bottom:44px;
+    border-top:1px solid #d6d0be; padding-top:22px; margin-bottom:40px;
   }
   /* the head splits: label in the margin, statement in the field. asymmetry
      does the work a change of typeface used to do. */
-  @media (min-width:1000px){
-    body.redesign .section-head{
-      display:grid; grid-template-columns:148px 1fr; column-gap:36px; align-items:start;
-    }
-    body.redesign .section-head .eyebrow{grid-column:1; grid-row:1; padding-top:9px;}
-    body.redesign .section-head h2{grid-column:2; grid-row:1; margin:0 0 14px;}
-    body.redesign .section-head p{grid-column:2; grid-row:2;}
-  }
+  /* The head stays stacked at every width. Splitting the label into the margin
+     pushed the heading and its supporting line into a narrow right-hand column,
+     which cost more in measure than the asymmetry was worth. */
+  body.redesign .section-head h2{margin:0 0 14px;}
 
   /* ---- 3. flatten. rounded boxes and shadows were softening a page that had
            a serif to give it warmth. without one, edges should be honest. */
@@ -840,7 +858,7 @@
   body.redesign .scale-num{font-size:clamp(28px,3.2vw,42px); letter-spacing:-0.04em;}
   body.redesign .scale-num.wide{font-size:clamp(25px,2.8vw,37px);}
   body.redesign .scale-strip{
-    border-top:2px solid var(--ink); border-bottom:1px solid var(--line);
+    border-top:1px solid #d6d0be; border-bottom:1px solid var(--line);
     padding:26px 0;
   }
   body.redesign .scale-label{font-size:13.5px; letter-spacing:0.01em;}
@@ -858,6 +876,31 @@
   }
 
 
+
+
+  /* All three panels share one grid cell, so the frame is always as tall as the
+     tallest view and switching never resizes the page under your thumb.
+     visibility rather than display keeps the height while removing the hidden
+     panels from the accessibility tree. Placed last: an earlier
+     .demo-panel[hidden]{display:none} was collapsing the stack. */
+  /* Mobile only. On a phone the frame is switched by thumb, and a frame that
+     resizes mid-swipe moves the page under the gesture, so equal height is
+     worth the cost. On desktop it is not: the reporting view is far shorter
+     than the student view, and forcing it to match left half a screen of dead
+     space below the content. Desktop lets each panel take its own height. */
+  @media (max-width:860px){
+    .demo-stack{display:grid; align-items:stretch;}
+    .demo-stack > .demo-panel{
+      grid-area:1 / 1; width:100%;
+      align-self:stretch; height:100%;
+      display:flex; flex-direction:column;
+    }
+    .demo-stack > .demo-panel > .cl-body{flex:1 1 auto;}
+    .demo-stack > .demo-panel > .cl-body > .privacy-note{margin-top:auto;}
+    .demo-stack > .demo-panel[hidden]{
+      display:block; visibility:hidden; pointer-events:none;
+    }
+  }
 
   /* ===== Responsive ===== */
   @media (max-width:1040px){
@@ -898,7 +941,14 @@
     .vframe-lower .n{font-size:10px;}
     .vframe-lower .r{font-size:8.5px;}
     .next-grid{grid-template-columns:repeat(3,1fr); gap:6px; margin-top:12px;}
-    .next-item{padding:9px 8px; font-size:11px;}
+    /* one row, one line each. The sub-labels are the first thing to go: they
+       explain three controls that are illustrative and not clickable. */
+    .next-grid{gap:5px; margin-top:10px;}
+    .next-item{
+      padding:8px 5px; font-size:10.5px; border-radius:6px;
+      text-align:center; line-height:1.2; white-space:nowrap;
+      overflow:hidden; text-overflow:ellipsis;
+    }
     .next-item span{display:none;}
     .res-grid{grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:18px;}
     .res-box{padding:12px 6px;}
@@ -914,8 +964,10 @@
     .demo-bar{margin-bottom:14px; gap:10px;}
     .demo-tabs{gap:2px; padding:3px;}
     .demo-tab{font-size:12.5px; padding:7px 13px;}
-    .demo-hint{display:block;}
-    .demo-arrow{width:34px; height:34px;}
+    .demo-nav{display:none;}
+    .demo-tabs{width:100%; justify-content:space-between;}
+    /* No chevrons on the frame. There is no free edge to place them on without
+       covering the header, and the tabs are already a full-width control. */
     .mockup-band{padding:56px 0;}
     .teach-lead{font-size:17px;}
     .privacy-note{margin-top:14px;}
@@ -1107,6 +1159,7 @@
       <p>Prompts, pause points, and a facilitation guide come built in. That is why your clip gets watched by a whole class instead of scrolled past.</p>
     </div>
 
+    <div class="demo-shell">
     <div class="demo-bar">
       <div class="demo-tabs" role="tablist" aria-label="Product views">
         <button class="demo-tab" role="tab" aria-selected="true" aria-controls="p-student" id="t-student">For students</button>
@@ -1124,7 +1177,7 @@
       </div>
     </div>
 
-    <p class="demo-hint">Swipe, or use the arrows, to move between views.</p>
+    <div class="demo-stack">
     <div class="mock-frame demo-panel" role="tabpanel" id="p-student" aria-labelledby="t-student">
       <div class="cl-chrome">
         <span class="cl-wordmark">Career Launch</span>
@@ -1163,12 +1216,13 @@
           </div>
           <div class="cl-col">
             <div class="next-grid">
-              <div class="next-item">Where this leads<span>Courses and pathways</span></div>
-              <div class="next-item">More like this<span>Same vibe or sector</span></div>
-              <div class="next-item">What fits me?<span>Quick interest check</span></div>
+              <div class="next-item">Where it leads<span>Courses and pathways</span></div>
+              <div class="next-item">More like this<span>Same sector</span></div>
+              <div class="next-item">What fits me<span>Quick interest check</span></div>
             </div>
           </div>
         </div>
+        <div class="privacy-note">No sign-in, no form, no email capture. A student can watch, react, and follow where it leads without being asked for anything.</div>
       </div>
     </div>
 
@@ -1180,18 +1234,21 @@
       <div class="cl-body">
         <div class="teach-split">
           <div>
-            <p class="teach-lead">Open one tab. Press play. That is the prep.</p>
-            <p class="teach-sub">Pause points become whole-class discussion. The collection needs no prep. The lesson plan is there when you want to teach it properly.</p>
-            <div class="mode-row">
-              <span class="mode-pill on">I'll project it</span>
-              <span class="mode-pill">Students on devices</span>
+            <p class="teach-lead">Open one tab. Press play.</p>
+            <p class="teach-sub">Pause points become whole-class discussion. No prep needed. The lesson plan is there when you want to go further.</p>
+            <div class="teach-modes">
+              <div class="mode-row">
+                <span class="mode-pill on">Project it</span>
+                <span class="mode-pill">On devices</span>
+              </div>
+              <span class="coll-cta">View lesson</span>
             </div>
             <div class="coll-list">
               <div class="coll-row"><span>Full collection</span><span class="dur">5 to 8 min</span></div>
               <div class="coll-row"><span>Mini collection</span><span class="dur">3 to 4 min</span></div>
               <div class="coll-row"><span>Single clip</span><span class="dur">Under 90 sec</span></div>
             </div>
-            <span class="coll-cta">Open the lesson plan</span>
+            </div>
           </div>
           <div class="plan-card">
             <p class="plan-h">If you want to go further</p>
@@ -1205,7 +1262,6 @@
           </div>
         </div>
       </div>
-    </div>
 
     <div class="mock-frame demo-panel" role="tabpanel" id="p-partner" aria-labelledby="t-partner" hidden>
       <div class="cl-chrome">
@@ -1216,7 +1272,7 @@
         <div class="res-grid">
           <div class="res-box"><div class="res-num">4,180</div><div class="res-lbl">clip views</div></div>
           <div class="res-box"><div class="res-num">148</div><div class="res-lbl">schools reached</div></div>
-          <div class="res-box"><div class="res-num">612</div><div class="res-lbl">opened your partner page</div></div>
+          <div class="res-box"><div class="res-num">612</div><div class="res-lbl">partner page views</div></div>
         </div>
         <div class="res-split">
           <div>
@@ -1235,8 +1291,9 @@
         <div class="privacy-note">Every figure is a board, school, or grade total. No accounts, no names, no email addresses, no identity carried between surfaces.</div>
       </div>
     </div>
-
-    <p class="mock-caption">Illustrative examples using sample data. Clips run 45 to 90 seconds, shot vertically.</p>
+    </div>
+    </div>
+    <p class="mock-caption">Illustrative examples using sample data.</p>
   </div>
 </section>
 
