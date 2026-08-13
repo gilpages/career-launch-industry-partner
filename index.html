@@ -513,7 +513,12 @@
   .teach-split{display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr); gap:30px; align-items:start;}
   .teach-lead{font-size:20px; font-weight:700; color:var(--navy); margin:0 0 6px;}
   .teach-sub{font-size:13.5px; color:#5c6480; margin:0 0 20px;}
-  .mode-row{display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;}
+  .mode-row{display:flex; gap:8px; margin-bottom:0; flex-wrap:wrap;}
+  /* the lesson control sits on the mode row rather than orphaned on its own
+     band between the pills and the collection list */
+  .teach-modes{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+  .teach-modes .coll-cta{margin:0 0 0 auto;}
+  .coll-list{margin-top:16px;}
   .mode-pill{
     font-size:12.5px; border:1px solid #d3d8e8; border-radius:6px; padding:8px 14px;
     background:#fff; color:#4d556f;
@@ -1248,7 +1253,6 @@
               <div class="coll-row"><span>Mini collection</span><span class="dur">3 to 4 min</span></div>
               <div class="coll-row"><span>Single clip</span><span class="dur">Under 90 sec</span></div>
             </div>
-            </div>
           </div>
           <div class="plan-card">
             <p class="plan-h">If you want to go further</p>
@@ -1262,6 +1266,7 @@
           </div>
         </div>
       </div>
+    </div>
 
     <div class="mock-frame demo-panel" role="tabpanel" id="p-partner" aria-labelledby="t-partner" hidden>
       <div class="cl-chrome">
