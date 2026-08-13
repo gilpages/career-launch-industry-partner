@@ -907,6 +907,42 @@
     }
   }
 
+
+  /* ---- rules: one mark per job -------------------------------------------
+     Two horizontal rules were landing in the same eyeline. The logo wall
+     closed with a full-width boundary, then the section head opened with its
+     own short rule about 80px below, with nothing between them. Both are
+     defensible alone; together they read as an accident.
+
+     Kept: the short section-head rule. It belongs to the content, groups the
+     label with the heading, and is the more editorial of the two.
+     Dropped: the full-width boundary immediately above a section head.
+
+     Same problem in the stat strip, which was sandwiched between two
+     full-width rules and then met the section boundary below, putting three
+     horizontals in a short span. It now closes with one rule and separates
+     its three figures with vertical hairlines instead. Vertical marks divide
+     without adding to the stack. */
+  body.redesign .logo-band{border-bottom:none;}
+  body.redesign #journey{border-top:none;}
+
+  body.redesign .scale-strip{
+    border-top:none;
+    border-bottom:1px solid #d6d0be;
+    padding:4px 0 26px;
+    gap:0;
+  }
+  body.redesign .scale-item{
+    padding-left:28px;
+    border-left:1px solid var(--line);
+  }
+  body.redesign .scale-item:first-child{
+    padding-left:0; border-left:none;
+  }
+  @media (max-width:640px){
+    body.redesign .scale-item{padding-left:0; border-left:none;}
+  }
+
   /* ===== Responsive ===== */
   @media (max-width:1040px){
     .logo-cell{height:54px;}   /* still five across; only the cell shortens */
