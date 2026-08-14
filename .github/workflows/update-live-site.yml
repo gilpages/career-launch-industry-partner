@@ -1,0 +1,30 @@
+name: Update live partners page
+
+# Every push to this repo tells the Career Launch platform to pull the latest
+# content and deploy it to https://careerlaunch.myblueprint.ca/partners.
+# Nothing to do manually — uploading files to this repo is enough.
+#
+# Requires the PLATFORM_ACTIONS_TOKEN repository secret (a fine-grained GitHub
+# token with "Actions: read and write" on the platform repo). If the secret is
+# missing or expired, this run skips harmlessly and the platform's daily
+# scheduled sync picks up the change instead.
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  trigger-platform-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger sync on the platform repo
+        env:
+          GH_TOKEN: ${{ secrets.PLATFORM_ACTIONS_TOKEN }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::warning::PLATFORM_ACTIONS_TOKEN secret is not set (or empty)."
+            echo "Skipping instant deploy - the platform's daily scheduled sync will pick this up."
+            exit 0
+          fi
+          gh workflow run sync-partners.yml -R alasdairmcmillan/platform_conference_career-launch
+          echo "Sync triggered - the page updates at careerlaunch.myblueprint.ca/partners in ~2 minutes."
