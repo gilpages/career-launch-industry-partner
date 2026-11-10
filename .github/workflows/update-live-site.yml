@@ -1,7 +1,7 @@
-name: Update live partners page
+name: Update live Career Launch pages
 
 # Every push to this repo tells the Career Launch platform to pull the latest
-# content and deploy it to https://careerlaunch.myblueprint.ca/partners.
+# content and deploy it to careerlaunch.myblueprint.ca (/partners, /associations).
 # Nothing to do manually — uploading files to this repo is enough.
 #
 # Requires the PLATFORM_ACTIONS_TOKEN repository secret (a fine-grained GitHub
@@ -27,4 +27,4 @@ jobs:
             exit 0
           fi
           gh workflow run sync-partners.yml -R alasdairmcmillan/platform_conference_career-launch
-          echo "Sync triggered - the page updates at careerlaunch.myblueprint.ca/partners in ~2 minutes."
+          echo "Sync triggered - pages update at careerlaunch.myblueprint.ca in ~2 minutes."
