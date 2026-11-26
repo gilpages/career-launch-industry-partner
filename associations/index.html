@@ -102,6 +102,8 @@ section.tint{background:var(--surface)}
   border:1.5px solid rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center}
 .playbtn::before{content:"";display:block;width:0;height:0;margin-left:.22rem;
   border-left:.9rem solid rgba(255,255,255,.94);border-top:.58rem solid transparent;border-bottom:.58rem solid transparent}
+.playbtn.sm{position:absolute;top:50%;left:50%;width:1.9rem;height:1.9rem;border-width:1px}
+.playbtn.sm::before{border-left-width:.52rem;border-top-width:.33rem;border-bottom-width:.33rem;margin-left:.12rem}
 .qoverlay{position:relative;z-index:2;margin:0 0 .55rem;font-weight:900;font-size:1.0625rem;line-height:1.25;max-width:none;text-shadow:0 1px 10px rgba(0,0,0,.6)}
 .who{position:relative;z-index:2;font-size:.8125rem;color:#C7D2EA;margin:0;max-width:none}
 .who b{display:block;color:#fff;font-weight:900;font-size:.9375rem}
@@ -114,7 +116,11 @@ section.tint{background:var(--surface)}
 .clipnotes h3:not(:first-child){margin-top:1.5rem}
 .clipnotes p{margin:0}
 
-.searchbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;font-size:.9375rem;color:var(--soft);margin:0 0 1.25rem;max-width:none}
+.radar{display:grid;grid-template-columns:1fr;gap:1rem;align-items:center;margin:0 0 1.25rem}
+@media (min-width:40rem){.radar{grid-template-columns:19rem 1fr;gap:1.75rem}}
+.radar svg{display:block;width:100%;height:auto;border-radius:5px;background:var(--surface)}
+.radar-key{margin:0;font-size:.9375rem;color:var(--soft)}
+.radar-key b{color:var(--ink)}
 .field{font-weight:700;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:.35rem .7rem}
 .rows{list-style:none;margin:0;padding:0}
 .row{display:grid;grid-template-columns:4.5rem 1fr;gap:0 1.25rem;padding:1rem 0;border-top:1px solid var(--line)}
@@ -143,6 +149,20 @@ section.tint{background:var(--surface)}
 .offer .tag{font-size:.8125rem;font-weight:700;color:var(--blue-ink);margin:0 0 .6rem}
 .offer h3{font-size:1.35rem;font-weight:900;letter-spacing:-.015em}
 .offer p{color:var(--soft);margin:0 0 1rem}
+.minirec{border:1px solid var(--line);border-radius:5px;padding:1rem;margin:0 0 1.1rem;background:var(--paper)}
+.minirec-head{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;justify-content:space-between;margin-bottom:.8rem}
+.minirec-head b{font-weight:900;font-size:1.0625rem}
+.minirec-head .state{margin-top:0}
+.minirec.plain{display:flex;gap:1rem;align-items:center}
+.minithumb{position:relative;flex:0 0 7rem;aspect-ratio:16/11;border-radius:4px;
+  background:radial-gradient(90% 80% at 30% 15%,rgba(41,98,255,.55),transparent 62%),linear-gradient(160deg,#20325C,#0A1020)}
+.minidur{position:absolute;right:.3rem;bottom:.3rem;font-size:.7rem;font-weight:700;color:#fff;
+  background:rgba(10,16,32,.6);border-radius:999px;padding:.1rem .4rem}
+.minitext b{display:block;font-weight:900;font-size:1.0625rem;line-height:1.25}
+.minitext span{font-size:.875rem;color:var(--soft)}
+.suits{display:grid;grid-template-columns:4.5rem 1fr;gap:.35rem .9rem;margin:0;font-size:.9375rem}
+.suits dt{font-weight:700;color:var(--blue-ink)}
+.suits dd{margin:0;color:var(--soft)}
 .bignums{display:grid;grid-template-columns:1fr;gap:1.1rem;margin:0 0 1.5rem;padding:0;list-style:none}
 @media (min-width:34rem){.bignums{grid-template-columns:repeat(3,1fr);gap:1.25rem}}
 .bignums li{border-top:2px solid var(--blue);padding-top:.6rem}
@@ -165,10 +185,17 @@ section.tint{background:var(--surface)}
 .cols{display:grid;grid-template-columns:1fr;gap:2rem}
 @media (min-width:52rem){.cols{grid-template-columns:1fr 1fr;gap:2.5rem 3.5rem}}
 
-.tl{display:grid;grid-template-columns:1fr;margin:2.5rem 0 0;border-top:1px solid var(--line)}
-@media (min-width:46rem){.tl{grid-template-columns:repeat(4,1fr);border-top:0}}
-.tl div{padding:1rem 0;border-bottom:1px solid var(--line)}
-@media (min-width:46rem){.tl div{border-top:2px solid var(--blue);border-bottom:0;padding:.9rem 1.25rem .9rem 0}}
+.tl{display:grid;grid-template-columns:1fr;margin:2.5rem 0 0}
+@media (min-width:46rem){.tl{grid-template-columns:repeat(4,1fr)}}
+.tl div{position:relative;padding:1.4rem 0 1.4rem 1.6rem;border-left:2px solid var(--line)}
+.tl div::before{content:"";position:absolute;left:-7px;top:1.6rem;width:12px;height:12px;border-radius:50%;
+  background:var(--blue);border:3px solid var(--paper)}
+.tl div:last-child{border-left-color:transparent}
+@media (min-width:46rem){
+  .tl div{padding:1.6rem 1.25rem 0 0;border-left:0;border-top:2px solid var(--line)}
+  .tl div::before{left:0;top:-7px}
+  .tl div:last-child{border-top-color:var(--line)}
+}
 .tl b{display:block;font-weight:900}
 .tl span{font-size:.9375rem;color:var(--soft)}
 .contact{margin:1.75rem 0 0;font-size:.9375rem;line-height:1.5;color:var(--soft);max-width:none}
@@ -286,11 +313,29 @@ footer p{max-width:48rem}
       </div>
 
       <div class="panel" id="p1" role="tabpanel" aria-labelledby="t1" hidden>
-        <p class="searchbar">
-          <span>Near</span><span class="field">the school’s postal code</span>
-          <span>within</span><span class="field">50 km</span>
-          <span>offering</span><span class="field">co-op placements</span>
-        </p>
+        <div class="radar">
+          <svg viewBox="0 0 320 200" role="img" aria-label="A school at the centre with member organizations at 10, 25 and 50 kilometres">
+            <defs><radialGradient id="rg" cx="0.5" cy="1" r="1">
+              <stop offset="0" stop-color="var(--blue)" stop-opacity="0.16"/>
+              <stop offset="1" stop-color="var(--blue)" stop-opacity="0"/>
+            </radialGradient></defs>
+            <rect width="320" height="200" fill="url(#rg)"/>
+            <g fill="none" stroke="var(--line)">
+              <path d="M160 194a56 56 0 0 1 0 0" /><circle cx="160" cy="194" r="48"/>
+              <circle cx="160" cy="194" r="104"/><circle cx="160" cy="194" r="166"/>
+            </g>
+            <g fill="var(--soft)" font-size="11" font-weight="700" text-anchor="middle">
+              <text x="160" y="140">10 km</text><text x="160" y="84">25 km</text><text x="160" y="26">50 km</text>
+            </g>
+            <g fill="var(--blue)">
+              <circle cx="118" cy="168" r="6"/><circle cx="206" cy="160" r="6"/>
+              <circle cx="92" cy="112" r="6"/><circle cx="236" cy="124" r="6"/><circle cx="168" cy="96" r="6"/>
+              <circle cx="56" cy="64" r="6"/><circle cx="268" cy="74" r="6"/><circle cx="196" cy="42" r="6"/>
+            </g>
+            <path d="M160 180l13 10v14h-26v-14z" fill="var(--ink)"/>
+          </svg>
+          <p class="radar-key"><b>The school is at the centre.</b> Each dot is an organization that has said what it will do with a student. A teacher sets the distance and what they are looking for, and gets this.</p>
+        </div>
         <ul class="rows">
           <li class="row">
             <div class="km">8 km<small>same town</small></div>
@@ -376,22 +421,40 @@ footer p{max-width:48rem}
       <div class="offer">
         <p class="tag">Free for every member</p>
         <h3>A verified directory listing</h3>
-        <p>A member adds its organization and verifies it: its sites, its seasons, and what it will actually do with a student. Verified records rank above unverified ones, and the date it verified stays on the record. Verified means the organization itself confirmed the record, on the date shown.</p>
-        <ul class="chips">
-          <li>Co-op placements</li><li>Apprenticeships, OYAP and RTA ready</li>
-          <li>Sector-Partnered Experiences</li><li>Guest speaker, in person</li>
-          <li>Guest speaker, virtual</li><li>Field trip facilitation</li>
-          <li>Certification training</li><li>Volunteer opportunities</li>
-          <li>French-language friendly</li>
-        </ul>
-        <p style="margin-top:1.25rem"><strong>Who it suits.</strong> Members with premises and staff who are willing to have a school get in touch. A member picks what it offers, can offer nothing but visibility, and can change it at any time.</p>
+        <div class="minirec">
+          <div class="minirec-head">
+            <b>[Member organization]</b>
+            <span class="state ok">Verified 14 Sep 2026</span>
+          </div>
+          <ul class="chips">
+            <li>Co-op placements</li><li>Apprenticeships, OYAP and RTA ready</li>
+            <li>Sector-Partnered Experiences</li><li>Guest speaker, in person</li>
+            <li>Guest speaker, virtual</li><li>Field trip facilitation</li>
+            <li>Certification training</li><li>Volunteer opportunities</li>
+            <li>French-language friendly</li>
+          </ul>
+        </div>
+        <p>A member adds its organization, picks what it will do with a student, and verifies it. Verified means the organization itself confirmed the record, on the date shown. Verified records rank above unverified ones.</p>
+        <dl class="suits">
+          <dt>Suits</dt><dd>Members with premises and staff who will take a school’s call.</dd>
+          <dt>Control</dt><dd>A member picks what it offers, including nothing but visibility, and changes it any time.</dd>
+        </dl>
       </div>
       <div class="offer paid">
         <p class="tag">Optional and paid</p>
         <h3>A Career Launch content partnership</h3>
-        <p>A member’s own people on screen, telling students what the work is like, credited to the member and framed by myBlueprint. It runs on LaunchPad, on the member’s sector page, and inside the collections teachers assign to a whole class.</p>
-        <p>Members arrange this with us directly. Your association does not quote it, sell it or administer it.</p>
-        <p style="margin-top:1.25rem"><strong>Who it suits.</strong> Members who want students to know the industry exists, whether or not they are set up to host one. This does not depend on a directory listing and works for a membership that is not built to take students on site.</p>
+        <div class="minirec plain">
+          <div class="minithumb"><span class="playbtn sm" aria-hidden="true"></span><span class="minidur">1:08</span></div>
+          <div class="minitext">
+            <b>[Member organization]</b>
+            <span>Their own people, on screen</span>
+          </div>
+        </div>
+        <p>A member’s own people telling students what the work is like, credited to the member and framed by myBlueprint. It runs on LaunchPad, on the member’s sector page, and inside the collections teachers assign to a whole class. Members arrange it with us directly.</p>
+        <dl class="suits">
+          <dt>Suits</dt><dd>Members who want students to know the industry exists, hosting or not.</dd>
+          <dt>Control</dt><dd>Independent of a listing. Works for a membership not set up to take students on site.</dd>
+        </dl>
       </div>
     </div>
     <div class="callout">
