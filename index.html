@@ -928,6 +928,20 @@
   body.redesign .logo-band{border-bottom:none;}
   body.redesign #journey{border-top:none;}
 
+  /* The logo band is a <section>, so "body.redesign section{padding:104px 0}"
+     outranked ".logo-band{padding:46px 0 44px}" and gave it 104px top and
+     bottom. Stacked on #journey's own 104px top, that left a ~200px hole
+     between the logos and "How you show up". Restore the band's own padding
+     at matching specificity and pull the next section up. */
+  body.redesign .logo-band{padding:46px 0 44px;}
+  body.redesign #journey{padding-top:64px;}
+  @media (max-width:860px){
+    body.redesign #journey{padding-top:48px;}
+  }
+  /* The label is inline-flex, so justify-content had nothing to centre and it
+     sat left while the logos sat centred. Make it a full-width flex row. */
+  body.redesign .logo-band-label{display:flex;}
+
   body.redesign .scale-strip{
     border-top:none;
     border-bottom:1px solid #d6d0be;
